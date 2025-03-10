@@ -2,14 +2,14 @@ import random
 
 class Birthday:
     # Setting default variables
-    num_people = 23
-    num_rolls = 10
-    days = 365
-    include_29_feb = False
+    num_people: int = 23
+    num_rolls: int = 10
+    days: int = 365
+    include_29_feb: bool = False
 
     def simulation(self):
-        t = 0
-        all_rolls = 0
+        t: int = 0
+        all_rolls: int = 0
 
         # Rolling num_rolls times and checking for common birthdays
         for _ in range(self.num_rolls):
@@ -55,10 +55,10 @@ class Birthday:
 # Class for Infinite Monkey Theorem
 class Monkey:
     # Default variables
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
-    word = "a"
-    tries = 0
-    process = True
+    alphabet: str = "abcdefghijklmnopqrstuvwxyz"
+    word: str = "a"
+    tries: int = 0
+    process: bool = True
 
     def simulation(self):
         monkey_typing = ''.join(random.choices(self.alphabet, k=len(self.word)))
@@ -80,6 +80,7 @@ class Monkey:
 
     def show_process(self):
         self.process = not self.process
+        return self.process
 
 
 birthday = Birthday()
@@ -120,6 +121,8 @@ while True:
             while not word.isalpha():
                 word = str(input("Word: "))
             monkey.new_word(word)
+        elif sim in ["monkey", "m"] and com == "show_process":
+            print(monkey.show_process())
 
         elif sim == "" and com == "exit":
             break
