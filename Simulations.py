@@ -58,12 +58,14 @@ class Monkey:
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     word = "a"
     tries = 0
+    process = True
 
     def simulation(self):
         monkey_typing = ''.join(random.choices(self.alphabet, k=len(self.word)))
         percentage = 1 / pow(len(self.alphabet), len(self.word)) * 100
         while monkey_typing != self.word:
-            print(f"{monkey_typing}   |   Try #{self.tries}   |   Percentage {percentage}")
+            if self.process:
+                print(f"{monkey_typing}   |   Try #{self.tries}   |   Percentage {percentage}")
             monkey_typing = ''.join(random.choices(self.alphabet, k=len(self.word)))
             self.tries += 1
         print(f"{monkey_typing}   |   Try #{self.tries}   |   Percentage {percentage}")
@@ -75,6 +77,9 @@ class Monkey:
 
     def new_word(self, w):
         self.word = w.lower().strip()
+
+    def show_process(self):
+        self.process = not self.process
 
 
 birthday = Birthday()
