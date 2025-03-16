@@ -52,7 +52,7 @@ class Monkey:
         self.process = tk.IntVar()
 
     def simulation(self):
-        self.tries = 0
+        self.tries = 1
         monkey_typing = ''.join(random.choices(self.alphabet, k=len(self.word)))
         monkey_typing_history.delete(0, tk.END)
 
@@ -67,7 +67,7 @@ class Monkey:
 
     def new_word(self, event=None):
         new_word = set_new_word.get()
-        if self.word.isalpha():
+        if new_word.isalpha():
             self.word = new_word
             percentage = 100 / pow(len(self.alphabet), len(self.word))
             percentage_of_typing.config(text=f"{percentage}%")
