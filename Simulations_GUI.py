@@ -103,11 +103,11 @@ people.grid(row=2, column=0, sticky="ew")
 rolls = ttk.Label(birthday_frame, text=f"Rolls: {birthday.num_rolls}")
 rolls.grid(row=3, column=0, sticky="ew")
 
-set_people = ttk.Entry(birthday_frame, width=5)
+set_people = ttk.Entry(birthday_frame, width=15)
 set_people.grid(row=2, column=1)
 set_people.bind("<Return>", birthday.change_people)
 
-set_rolls = ttk.Entry(birthday_frame, width=5)
+set_rolls = ttk.Entry(birthday_frame, width=15)
 set_rolls.grid(row=3, column=1)
 set_rolls.bind("<Return>", birthday.change_rolls)
 
