@@ -1,7 +1,7 @@
 import random
 import tkinter as tk
 from tkinter import ttk
-
+# Setting root
 root = tk.Tk()
 root.title("Simulations")
 
@@ -14,7 +14,7 @@ class Birthday:
         self.num_rolls = 10
         self.days = 365
         self.include_29_feb = tk.IntVar()
-
+    # Birthday simulation
     def simulation(self):
         t = 0
         all_rolls = 0
@@ -47,34 +47,39 @@ class Birthday:
 class Monkey:
     def __init__(self):
         self.alphabet = "abcdefghijklmnopqrstuvwxyz"
-        self.word = "a"
+        self.word = ""
         self.tries = 0
         self.process = tk.IntVar()
 
     def simulation(self):
-        self.tries = 1
+        # Setting everything up
+        self.tries = 0
         monkey_typing = ''.join(random.choices(self.alphabet, k=len(self.word)))
         monkey_typing_history.delete(0, tk.END)
-
-        while monkey_typing != self.word:
-            if self.process.get():
-                monkey_typing_history.insert(tk.END, f"{monkey_typing}   |   Try #{self.tries}")
-            monkey_typing = ''.join(random.choices(self.alphabet, k=len(self.word)))
-            self.tries += 1
-
+        # If you gave a word
+        if self.word.isalpha():
+            # While random set of letters are not your word
+            while monkey_typing != self.word:
+                # If process is True, show up every set of letters
+                if self.process.get():
+                    monkey_typing_history.insert(tk.END, f"{monkey_typing}   |   Try #{self.tries}")
+                # Give new set of letters
+                monkey_typing = ''.join(random.choices(self.alphabet, k=len(self.word)))
+                self.tries += 1
         monkey_typing_history.insert(tk.END, f"{monkey_typing}   |   Try #{self.tries}")
-        self.tries = 0
 
     def new_word(self, event=None):
+        # If new word is a word, then set it as word and show percentage
         new_word = set_new_word.get()
         if new_word.isalpha():
             self.word = new_word
             percentage = 100 / pow(len(self.alphabet), len(self.word))
             percentage_of_typing.config(text=f"{percentage}%")
-
+# Setting up objects
 birthday = Birthday()
 monkey = Monkey()
 
+# Setting up frames
 birthday_frame = ttk.Frame(root)
 birthday_frame.grid(column=0, row=0, sticky="nsew", padx=15, pady=15)
 
@@ -127,8 +132,7 @@ show_process_checkbox.grid(row=1, column=0, sticky="ew")
 monkey_typing_history = tk.Listbox(monkey_frame)
 monkey_typing_history.grid(row=2, column=0, sticky="nsew", columnspan=2, rowspan=2)
 
-a_percentage = 100 / pow(len(monkey.alphabet), len(monkey.word))
-percentage_of_typing = ttk.Label(text=f"{a_percentage}%")
+percentage_of_typing = ttk.Label(text="0%")
 percentage_of_typing.grid(row=3, column=0, sticky="ew")
 
 set_new_word = tk.Entry()
