@@ -53,7 +53,7 @@ class Monkey:
 
     def simulation(self):
         # Setting everything up
-        self.tries = 0
+        self.tries = 1
         monkey_typing = ''.join(random.choices(self.alphabet, k=len(self.word)))
         monkey_typing_history.delete(0, tk.END)
         # If you gave a word
